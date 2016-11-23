@@ -1,6 +1,5 @@
 package br.edu.ifpr.tads2014.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
