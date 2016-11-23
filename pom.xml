@@ -6,7 +6,7 @@
 	<groupId>br.edu.ifpr.tads2014</groupId>
 	<artifactId>security-login</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>Security Login</name>
 	<description>Login seguro com Security and Social</description>
@@ -74,6 +74,13 @@
             <version>${spring-social-github.version}</version>
         </dependency>
 
+		<!-- apache -->
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.4.0</version>
+		</dependency>
+
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-twitter</artifactId>
@@ -98,7 +105,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -110,7 +116,12 @@
             <artifactId>javax.el-api</artifactId>
             <version>2.2.4</version>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
