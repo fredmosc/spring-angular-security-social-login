@@ -1,4 +1,4 @@
-package br.edu.ifpr.tads2014;
+package br.edu.ifpr.tads2014.initializer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
