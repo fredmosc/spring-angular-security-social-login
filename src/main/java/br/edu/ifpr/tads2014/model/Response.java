@@ -1,4 +1,4 @@
-package br.edu.ifpr.tads2014.initializer.model;
+package br.edu.ifpr.tads2014.model;
 
 public class Response {
 

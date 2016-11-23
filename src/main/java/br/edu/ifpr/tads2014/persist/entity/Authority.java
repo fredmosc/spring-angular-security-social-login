@@ -1,4 +1,4 @@
-package br.edu.ifpr.tads2014.initializer.persist.entity;
+package br.edu.ifpr.tads2014.persist.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
