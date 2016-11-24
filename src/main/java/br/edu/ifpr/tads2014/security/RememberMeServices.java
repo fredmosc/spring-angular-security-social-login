@@ -6,8 +6,6 @@ import br.edu.ifpr.tads2014.persist.entity.User;
 import br.edu.ifpr.tads2014.persist.repo.TokenRepo;
 import br.edu.ifpr.tads2014.persist.repo.UserRepo;
 import org.apache.commons.lang3.time.DateUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
@@ -47,7 +45,6 @@ import static br.edu.ifpr.tads2014.config.SecurityConfig.REMEMBER_ME_KEY;
 public class RememberMeServices extends
         AbstractRememberMeServices {
 
-    private final Logger log = LoggerFactory.getLogger(RememberMeServices.class);
 
     // Token is valid for one month
     private static final int TOKEN_VALIDITY_DAYS = 31;
@@ -81,7 +78,6 @@ public class RememberMeServices extends
         String login = token.getUserLogin();
 
         // Token also matches, so login is valid. Update the token value, keeping the *same* series number.
-        log.debug("Refreshing persistent login token for user '{}', series '{}'", login, token.getSeries());
         token.setDate(new Date());
         token.setValue(generateTokenData());
         token.setIpAddress(request.getRemoteAddr());
@@ -90,7 +86,6 @@ public class RememberMeServices extends
             tokenRepo.save(token);
             addCookie(token, request, response);
         } catch (DataAccessException e) {
-            log.error("Failed to update token: ", e);
             throw new RememberMeAuthenticationException("Autologin failed due to data access problem", e);
         }
         return getUserDetailsService().loadUserByUsername(login);
@@ -112,7 +107,6 @@ public class RememberMeServices extends
             tokenRepo.save(token);
             addCookie(token, request, response);
         } catch (DataAccessException e) {
-            log.error("Failed to save persistent token ", e);
         }
     }
 
@@ -132,9 +126,7 @@ public class RememberMeServices extends
                 Token token = getPersistentToken(cookieTokens);
                 tokenRepo.delete(token.getSeries());
             } catch (InvalidCookieException ice) {
-                log.info("Invalid cookie, no persistent token could be deleted");
             } catch (RememberMeAuthenticationException rmae) {
-                log.debug("No persistent token found, so no token could be deleted");
             }
         }
         super.logout(request, response, authentication);
@@ -156,7 +148,6 @@ public class RememberMeServices extends
         try {
             token = tokenRepo.findOne(presentedSeries);
         } catch (DataAccessException e) {
-            log.error("Error to access database", e );
         }
 
         if (token == null) {
@@ -165,7 +156,6 @@ public class RememberMeServices extends
         }
 
         // We have a match for this user/series combination
-        log.info("presentedToken={} / tokenValue={}", presentedToken, token.getValue());
         if (!presentedToken.equals(token.getValue())) {
             // Token doesn't match series value. Delete this session and throw an exception.
             tokenRepo.delete(token.getSeries());

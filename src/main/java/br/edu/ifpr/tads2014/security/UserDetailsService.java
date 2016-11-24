@@ -3,8 +3,6 @@ package br.edu.ifpr.tads2014.security;
 import br.edu.ifpr.tads2014.persist.entity.Authority;
 import br.edu.ifpr.tads2014.persist.entity.User;
 import br.edu.ifpr.tads2014.persist.repo.UserRepo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +20,6 @@ import java.util.Collection;
 @Component("userDetailsService")
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-    private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
 
     @Autowired
     private UserRepo userRepo;
@@ -30,7 +27,6 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String login) {
-        log.debug("Authenticating {}", login);
 
         User user = userRepo.findByLogin(login);
         if (user == null) {

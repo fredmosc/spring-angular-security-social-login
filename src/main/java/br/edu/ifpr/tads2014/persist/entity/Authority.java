@@ -1,7 +1,5 @@
 package br.edu.ifpr.tads2014.persist.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 
@@ -10,8 +8,7 @@ import javax.persistence.*;
 public class Authority {
 
 	@Id
-	@GenericGenerator(name = "generator", strategy = "increment")
-	@GeneratedValue(generator = "generator")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "name", nullable = false)

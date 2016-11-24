@@ -1,5 +1,6 @@
 package br.edu.ifpr.tads2014.initializer;
 
+import br.edu.ifpr.tads2014.SecurityLoginApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
