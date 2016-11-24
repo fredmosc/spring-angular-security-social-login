@@ -2,8 +2,6 @@ package br.edu.ifpr.tads2014.config;
 
 
 import br.edu.ifpr.tads2014.security.RestUnauthorizedEntryPoint;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,13 +22,11 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     public static final String REMEMBER_ME_KEY = "rememberme_key";
 
     public SecurityConfig() {
         super();
-        logger.info("loading SecurityConfig ................................................ ");
     }
 
     @Autowired

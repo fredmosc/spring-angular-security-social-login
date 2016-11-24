@@ -1,8 +1,5 @@
 package br.edu.ifpr.tads2014.persist.entity;
 
-
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,9 +10,7 @@ import java.util.Set;
 public class User {
 
 	@Id
-	@GenericGenerator(name = "generator", strategy = "increment")
-	@GeneratedValue(generator = "generator")
-	@Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "first_name", nullable = false)
