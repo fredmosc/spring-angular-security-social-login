@@ -107,6 +107,7 @@ public class RememberMeServices extends
             tokenRepo.save(token);
             addCookie(token, request, response);
         } catch (DataAccessException e) {
+            System.out.println("RememberMeServices.onLoginSuccess" + e.getMessage());
         }
     }
 
@@ -126,7 +127,9 @@ public class RememberMeServices extends
                 Token token = getPersistentToken(cookieTokens);
                 tokenRepo.delete(token.getSeries());
             } catch (InvalidCookieException ice) {
+                System.out.println("RememberMeServices.logout" + ice.getMessage());
             } catch (RememberMeAuthenticationException rmae) {
+                System.out.println("RememberMeServices.logout" + rmae.getMessage()) ;
             }
         }
         super.logout(request, response, authentication);
@@ -148,6 +151,7 @@ public class RememberMeServices extends
         try {
             token = tokenRepo.findOne(presentedSeries);
         } catch (DataAccessException e) {
+            System.out.println("RememberMeServices.getPersistentToken" + e.getMessage());
         }
 
         if (token == null) {
